@@ -1,7 +1,7 @@
 <?php
 
 $conf = new RdKafka\Conf();
-$conf->set('metadata.broker.list', 'kafka:9092');
+$conf->set('bootstrap.servers', 'kafka:9092');
 
 //If you need to produce exactly once and want to keep the original produce order, uncomment the line below
 //$conf->set('enable.idempotence', 'true');

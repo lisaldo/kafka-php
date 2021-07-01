@@ -1,0 +1,10 @@
+{
+  "require": {
+    "ext-rdkafka": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Lisaldo\\Kafka\\": "src"
+    }
+  }
+}

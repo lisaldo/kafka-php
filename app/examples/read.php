@@ -10,13 +10,13 @@ $conf->setRebalanceCb(function (RdKafka\KafkaConsumer $kafka, $err, array $parti
     switch ($err) {
         case RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS:
             echo "Assign: ";
-            var_dump($partitions);
+            echo var_export($partitions);
             $kafka->assign($partitions);
             break;
 
         case RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS:
             echo "Revoke: ";
-            var_dump($partitions);
+            echo var_export($partitions);
             $kafka->assign(NULL);
             break;
 
