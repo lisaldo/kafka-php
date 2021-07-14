@@ -1,6 +1,7 @@
 {
   "require": {
-    "ext-rdkafka": "*"
+    "ext-rdkafka": "*",
+    "ext-readline": "*"
   },
   "autoload": {
     "psr-4": {
