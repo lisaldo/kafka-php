@@ -15,7 +15,8 @@ class ConsumerDemoGroups
         $conf->set(ConsumerConfig::BOOTSTRAP_SERVERS_CONFIG, 'kafka:9092');
         $conf->set(ConsumerConfig::GROUP_ID_CONFIG, 'my-fourth-application-6');
         $conf->set(ConsumerConfig::AUTO_OFFSET_RESET_CONFIG, 'earliest');
-        $conf->set(ConsumerConfig::HEARTBEAT_INTERVAL_MS, 1);
+        $conf->set(ConsumerConfig::HEARTBEAT_INTERVAL_MS, 2000);
+        $conf->set(ConsumerConfig::SESSION_TIMEOUT_MS_CONFIG, 3000);
 
         $conf->setRebalanceCb(function (KafkaConsumer $kafka, $err, $partitions) {
             /**
