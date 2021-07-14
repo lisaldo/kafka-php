@@ -18,7 +18,30 @@ class ConsumerDemoGroups
         $conf->set(ConsumerConfig::HEARTBEAT_INTERVAL_MS, 1);
 
         $conf->setRebalanceCb(function (KafkaConsumer $kafka, $err, $partitions) {
-            var_dump($err, $partitions);
+            /**
+             * When at least two consumers are already connected with Kafka and
+             * one of them is disconnected, the second one will receive two events
+             * - The first one is informing that every partition was revoked and all
+             *      topics needs to be unassigned
+             * - The second one is informing the new partitions assigned to this
+             *      consumer
+             */
+            switch ($err) {
+                case RD_KAFKA_RESP_ERR__ASSIGN_PARTITIONS:
+                    echo "Assign: ";
+                    var_dump($partitions);
+                    $kafka->assign($partitions);
+                    break;
+
+                case RD_KAFKA_RESP_ERR__REVOKE_PARTITIONS:
+                    echo "Revoke: ";
+                    var_dump($partitions);
+                    $kafka->assign(null);
+                    break;
+
+                default:
+                    throw new \Exception($err);
+            }
         });
 
         // create consumer
